@@ -15,6 +15,11 @@ export default new Router({
       path: "/dashboard",
       name: "dashboard",
       component: () => import("./views/Dashboard.vue")
+    },
+    {
+      path: "/shortcuts",
+      name: "shortcuts",
+      component: () => import("./views/Shortcuts.vue")
     }
   ]
 });

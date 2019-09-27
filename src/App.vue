@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <div class="d-flex" id="wrapper">
+    <div class="d-flex" id="wrapper" :class="{'toggled': isActive}">
       <Sidebar />
       <div id="page-content-wrapper">
-        <Tabs />
+        <Tabs @toggle-sidebar="toggleSidebar"/>
         <router-view />
       </div>
     </div>
@@ -17,6 +17,16 @@ export default {
   components: {
     Tabs,
     Sidebar
+  },
+  data() {
+    return {
+      isActive: false
+    }
+  },
+  methods: {
+    toggleSidebar() {
+        this.isActive = !this.isActive;
+    }
   }
 }
 </script>
