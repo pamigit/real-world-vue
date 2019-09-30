@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h2>This is a title</h2>
-        <p>This is a shortcut text</p>
+    <div class="container-fluid">
+        <h1 class="mt-4">Shortcuts</h1>
+        <p>This is a shortcut text!!!</p>
     </div>
 </template>

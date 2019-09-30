@@ -20,6 +20,26 @@ export default new Router({
       path: "/shortcuts",
       name: "shortcuts",
       component: () => import("./views/Shortcuts.vue")
+    },
+    {
+      path: "/overview",
+      name: "overview",
+      component: () => import("./views/Overview.vue")
+    },
+    {
+      path: "/events",
+      name: "events",
+      component: () => import("./views/Events.vue")
+    },
+    {
+      path: "/profile",
+      name: "profile",
+      component: () => import("./views/Profile.vue")
+    },
+    {
+      path: "/status",
+      name: "status",
+      component: () => import("./views/Status.vue")
     }
   ]
 });
