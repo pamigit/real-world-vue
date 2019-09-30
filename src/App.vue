@@ -33,7 +33,7 @@ export default {
 
 <style>
   body {
-    overflow-x: hidden;
+    overflow-x: auto;
   }
 
   #sidebar-wrapper {
