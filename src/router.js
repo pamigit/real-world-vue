@@ -1,6 +1,12 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
+import Dashboard from "./views/Dashboard.vue";
+import Shortcuts from "./views/Shortcuts.vue";
+import Overview from "./views/Overview.vue";
+import Events from "./views/Events.vue";
+import Profile from "./views/Profile.vue";
+import Status from "./views/Status.vue";
 
 Vue.use(Router);
 
@@ -14,32 +20,32 @@ export default new Router({
     {
       path: "/dashboard",
       name: "dashboard",
-      component: () => import("./views/Dashboard.vue")
+      component: Dashboard
     },
     {
       path: "/shortcuts",
       name: "shortcuts",
-      component: () => import("./views/Shortcuts.vue")
+      component: Shortcuts
     },
     {
-      path: "/overview",
+      path: "/overview/:Pid",
       name: "overview",
-      component: () => import("./views/Overview.vue")
+      component: Overview
     },
     {
       path: "/events",
       name: "events",
-      component: () => import("./views/Events.vue")
+      component: Events
     },
     {
       path: "/profile",
       name: "profile",
-      component: () => import("./views/Profile.vue")
+      component: Profile
     },
     {
       path: "/status",
       name: "status",
-      component: () => import("./views/Status.vue")
+      component: Status
     }
   ]
 });

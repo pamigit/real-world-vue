@@ -4,7 +4,7 @@
       <Sidebar />
       <div id="page-content-wrapper">
         <Tabs @toggle-sidebar="toggleSidebar"/>
-        <router-view />
+        <router-view @go-to-detail="goToDetail" :products="products"/>
       </div>
     </div>
   </div>
@@ -13,6 +13,7 @@
 <script>
 import Tabs from "./components/Tabs";
 import Sidebar from "./components/Sidebar";
+import axios from "axios";
 export default {
   components: {
     Tabs,
@@ -20,12 +21,26 @@ export default {
   },
   data() {
     return {
-      isActive: false
+      isActive: false,
+      products: []
     }
+  },
+  created() {
+      axios.get('https://jsonplaceholder.typicode.com/photos?_limit=12')
+        .then(res => this.products = res.data)
+        .catch(err => console.log(err));
   },
   methods: {
     toggleSidebar() {
         this.isActive = !this.isActive;
+    },
+    goToDetail(id) {
+      this.$router.push({
+        name: 'overview',
+        params: {
+          Pid: id
+        }
+      });
     }
   }
 }
