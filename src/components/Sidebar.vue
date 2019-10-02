@@ -4,7 +4,6 @@
         <div class="list-group list-group-flush">
             <router-link to="/dashboard" class="list-group-item list-group-item-action bg-light">Dashboard</router-link>
             <router-link to="/shortcuts" class="list-group-item list-group-item-action bg-light">Shortcuts</router-link>
-            <router-link to="/overview" class="list-group-item list-group-item-action bg-light">Overview</router-link>
             <router-link to="/events" class="list-group-item list-group-item-action bg-light">Events</router-link>
             <router-link to="/profile" class="list-group-item list-group-item-action bg-light">Profile</router-link>
             <router-link to="/status" class="list-group-item list-group-item-action bg-light">Status</router-link>

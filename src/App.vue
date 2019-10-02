@@ -34,11 +34,14 @@ export default {
     toggleSidebar() {
         this.isActive = !this.isActive;
     },
-    goToDetail(id) {
+    goToDetail(item) {
+      
+      item.url = item.url.replace("600", "400");
+      
       this.$router.push({
         name: 'overview',
         params: {
-          Pid: id
+          Pid: item.id
         }
       });
     }
