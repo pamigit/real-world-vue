@@ -1,16 +1,12 @@
 <template>
-    <div>
-        <Palete v-for="palete in palets" :key="palete.id" @change-color="$emit('change-color', palete.color)" :style="{backgroundColor:palete.color}" :palete="palete"/>
-    </div>
+    <span>
+        <div v-for="palete in palets" :key="palete.id" @mouseover="$emit('change-color', palete.color)" @mouseout="$emit('default-color')" :style="{backgroundColor:palete.color}" class="palete ml-3"></div>
+    </span>
 </template>
 
 <script>
-import Palete from "./Palete"
 export default {
     name: 'Palets',
-    components: {
-        Palete
-    },
     data() {
         return {
             palets: [
@@ -32,3 +28,10 @@ export default {
 }
 </script>
 
+<style scoped>
+    .palete {
+        width: 25px;
+        height: 25px;
+        display: inline-block;
+    }
+</style>
