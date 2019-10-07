@@ -1,12 +1,22 @@
 <template>
   <div class="container-fluid text-center">
     <h1 class="mt-4">Canvas</h1>
-    <button class="mt-4 btn btn-outline-info d-block">Expand canvas</button>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <button class="btn btn-outline-info" type="button" @click="expandCanvas">Expand canvas</button>
+      </div>
+      <input type="text" class="form-control" v-model="resolution" placeholder="Add resolution for expanding canvas..." aria-label="" aria-describedby="basic-addon1">
+      <div class="input-group-append">
+        <span class="input-group-text">px</span>
+      </div>
+    </div>
+
     <div class="d-block text-left mt-3">
-      <span>Change color: </span>
+      <span>Change background color: </span>
       <Palets  @change-color="changeColor" @default-color="defaultColor"/>
     </div>
-    <div class="mt-5 canvas d-inline-block" :style="{backgroundColor:currentColor}" @mousemove="coordinates">({{corX}},{{corY}})</div>
+    <div class="mt-5 canvas d-inline-block" :style="compStyle" @mousemove="coordinates">({{corX}},{{corY}})</div>
   </div>
 </template>
 
@@ -21,7 +31,9 @@ export default {
     return {
       corX: '0',
       corY: '0',
-      currentColor: 'aquamarine'
+      currentColor: 'aquamarine',
+      resolution: '300',
+      resolutionStyle: ''
     }
   },
   methods: {
@@ -34,8 +46,20 @@ export default {
     },
     defaultColor() {
         this.currentColor = 'aquamarine';
+    },
+    expandCanvas() {
+        this.resolutionStyle = this.resolution;
     }
-  }
+  },
+  computed: {
+    compStyle() {
+      return {
+        backgroundColor: this.currentColor,
+        width: this.resolutionStyle+'px',
+        height: this.resolutionStyle+'px'
+      }
+    }
+  } 
 }
 </script>
 
@@ -45,7 +69,6 @@ export default {
     height: 300px;
     border: 2px solid darkblue;
     color: red;
-    padding-top: 140px;
   }
   
 </style>
