@@ -2,20 +2,22 @@
   <div class="container-fluid text-center">
     <h1 class="mt-4">Canvas</h1>
 
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <button class="btn btn-outline-info" type="button" @click="expandCanvas">Expand canvas</button>
+    <div class="col col-lg-6 mt-4">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <button class="btn btn-outline-info" type="button" @click="expandCanvas">Expand canvas</button>
+        </div>
+        <input type="text" class="form-control" v-model="resolution" placeholder="Add resolution for expanding canvas..." aria-label="" aria-describedby="basic-addon1">
+        <div class="input-group-append">
+          <span class="input-group-text">px</span>
+        </div>
       </div>
-      <input type="text" class="form-control" v-model="resolution" placeholder="Add resolution for expanding canvas..." aria-label="" aria-describedby="basic-addon1">
-      <div class="input-group-append">
-        <span class="input-group-text">px</span>
+      <div class="d-block text-left mt-3">
+        <span>Change background color: </span>
+        <Palets  @change-color="changeColor" @default-color="defaultColor"/>
       </div>
     </div>
-
-    <div class="d-block text-left mt-3">
-      <span>Change background color: </span>
-      <Palets  @change-color="changeColor" @default-color="defaultColor"/>
-    </div>
+  
     <div class="mt-5 canvas d-inline-block" :style="compStyle" @mousemove="coordinates">({{corX}},{{corY}})</div>
   </div>
 </template>
@@ -31,7 +33,8 @@ export default {
     return {
       corX: '0',
       corY: '0',
-      currentColor: 'aquamarine',
+      currentColor: 'brown',
+      baseColor: 'brown',
       resolution: '300',
       resolutionStyle: ''
     }
@@ -42,13 +45,14 @@ export default {
       this.corY = event.offsetY;
     },
     changeColor(color) {
-        this.currentColor = color;
+      this.baseColor = color;
+      this.currentColor = this.baseColor;
     },
     defaultColor() {
-        this.currentColor = 'aquamarine';
+      this.currentColor = this.baseColor;
     },
     expandCanvas() {
-        this.resolutionStyle = this.resolution;
+      this.resolutionStyle = this.resolution;
     }
   },
   computed: {
@@ -68,7 +72,8 @@ export default {
     width: 300px;
     height: 300px;
     border: 2px solid darkblue;
-    color: red;
+    color: black;
+    font-weight: bold;
   }
   
 </style>
