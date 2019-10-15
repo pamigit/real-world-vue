@@ -5,8 +5,9 @@ import Dashboard from "./views/Dashboard.vue";
 import Shortcuts from "./views/Shortcuts.vue";
 import Overview from "./views/Overview.vue";
 import Events from "./views/Events.vue";
-import Profile from "./views/Profile.vue";
+import Profiles from "./views/Profiles.vue";
 import Status from "./views/Status.vue";
+import EditProfile from "./views/EditProfile.vue";
 
 Vue.use(Router);
 
@@ -38,14 +39,19 @@ export default new Router({
       component: Events
     },
     {
-      path: "/profile",
-      name: "profile",
-      component: Profile
+      path: "/profiles",
+      name: "profiles",
+      component: Profiles
     },
     {
       path: "/status",
       name: "status",
       component: Status
+    },
+    {
+      path: "/editprofile/:Profile",
+      name: "editprofile",
+      component: EditProfile
     }
   ]
 });

@@ -4,7 +4,7 @@
       <Sidebar />
       <div id="page-content-wrapper">
         <Tabs @toggle-sidebar="toggleSidebar"/>
-        <router-view @go-to-detail="goToDetail" :products="products"/>
+        <router-view @go-to-detail="goToDetail" :products="products" :profiles="profiles"/>
       </div>
     </div>
   </div>
@@ -22,12 +22,16 @@ export default {
   data() {
     return {
       isActive: false,
-      products: []
+      products: [],
+      profiles: []
     }
   },
   created() {
       axios.get('https://jsonplaceholder.typicode.com/photos?_limit=12')
         .then(res => this.products = res.data)
+        .catch(err => console.log(err));
+      axios.get('https://reqres.in/api/users?page=2')
+        .then(res => this.profiles = res.data.data, )
         .catch(err => console.log(err));
   },
   methods: {
@@ -58,7 +62,7 @@ export default {
     min-height: 100vh;
     margin-left: -15rem;
     -webkit-transition: margin .25s ease-out;
-    -moz-transition: margin .25s ease-out;
+    -moz-transition: margin .25s ease-out;   
     -o-transition: margin .25s ease-out;
     transition: margin .25s ease-out;
   }
