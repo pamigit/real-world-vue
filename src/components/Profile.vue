@@ -13,7 +13,7 @@
                         <li><i class="fab fa-twitter-square"></i> Twitter</li>
                     </ul>
                     <p class="text-right m-0">
-                        <router-link to="/editprofile/${profile}" class="btn btn-primary"><i class="far fa-user"></i> Edit Profile</router-link>
+                        <router-link :to="'/editprofile/'+profile.id" class="btn btn-primary"><i class="far fa-user"></i> Edit Profile</router-link>
                     </p>
                 </div>
             </div>
@@ -23,7 +23,7 @@
 
 <script>
 export default {
-    name: 'Profile',
+    name: 'profiles',
     props: ['profiles'],
     filters: {
         uppercase: function(value) {

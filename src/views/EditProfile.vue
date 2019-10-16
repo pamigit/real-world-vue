@@ -8,25 +8,26 @@
                         <hr>
                     </div>
                 </div>
-                <div class="row">
+                <div v-for="profile in profiles" :key="profile.id">
+                <div class="row" v-if="proId == profile.id">
                     <div class="col-md-12">
                         <form>
                             <div class="form-group row">
                                 <label for="username" class="col-4 col-form-label">User Name*</label> 
                                 <div class="col-8">
-                                    <input id="username" name="username" placeholder="Username" class="form-control here" required="required" type="text">
+                                    <input v-model="profile.first_name" id="username" name="username" placeholder="Username" class="form-control here" required="required" type="text">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="name" class="col-4 col-form-label">First Name</label> 
                                 <div class="col-8">
-                                    <input id="name" name="name" placeholder="First Name" class="form-control here" type="text">
+                                    <input v-model="profile.first_name" id="name" name="name" placeholder="First Name" class="form-control here" type="text">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="lastname" class="col-4 col-form-label">Last Name</label> 
                                 <div class="col-8">
-                                    <input id="lastname" name="lastname" placeholder="Last Name" class="form-control here" type="text">
+                                    <input v-model="profile.last_name" id="lastname" name="lastname" placeholder="Last Name" class="form-control here" type="text">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -46,7 +47,7 @@
                             <div class="form-group row">
                                 <label for="email" class="col-4 col-form-label">Email*</label> 
                                 <div class="col-8">
-                                    <input id="email" name="email" placeholder="Email" class="form-control here" required="required" type="text">
+                                    <input v-model="profile.email" id="email" name="email" placeholder="Email" class="form-control here" required="required" type="text">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -75,7 +76,7 @@
                         </form>
                     </div>
                 </div>
-                
+                </div>
             </div>
         </div>
      </div>
@@ -83,7 +84,13 @@
 
 <script>
     export default {
-        
+        name: 'editprofile',
+        data() {
+            return {
+                proId: this.$route.params.profileId
+            }
+        },
+        props: ['profiles']
     }
 </script>
 

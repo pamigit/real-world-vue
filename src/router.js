@@ -49,7 +49,7 @@ export default new Router({
       component: Status
     },
     {
-      path: "/editprofile/:Profile",
+      path: "/editprofile/:profileId",
       name: "editprofile",
       component: EditProfile
     }
