@@ -14,6 +14,9 @@
 import Tabs from "./components/Tabs";
 import Sidebar from "./components/Sidebar";
 import axios from "axios";
+import { myLifeCycleHooks } from "./mymix";
+import {mapActions, mapState} from "vuex";
+
 export default {
   components: {
     Tabs,
@@ -22,19 +25,24 @@ export default {
   data() {
     return {
       isActive: false,
-      products: [],
+      //products: [],
       profiles: []
     }
   },
-  created() {
-      axios.get('https://jsonplaceholder.typicode.com/photos?_limit=12')
-        .then(res => this.products = res.data)
-        .catch(err => console.log(err));
-      axios.get('https://reqres.in/api/users?page=2')
+  //created() {
+      
+      
+  //},
+  async created() {
+    await this.getProductsAction();
+    axios.get('https://reqres.in/api/users?page=2')
         .then(res => this.profiles = res.data.data, )
         .catch(err => console.log(err));
+    console.log('hello from component!!!');
   },
   methods: {
+    ...mapActions(['getProductsAction']),
+    
     toggleSidebar() {
         this.isActive = !this.isActive;
     },
@@ -49,6 +57,10 @@ export default {
         }
       });
     }
+  },
+  mixins: [myLifeCycleHooks],
+  computed: {
+    ...mapState(['products'])
   }
 }
 </script>
