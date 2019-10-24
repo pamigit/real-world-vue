@@ -13,7 +13,6 @@
 <script>
 import Tabs from "./components/Tabs";
 import Sidebar from "./components/Sidebar";
-import axios from "axios";
 import { myLifeCycleHooks } from "./mymix";
 import {mapActions, mapState} from "vuex";
 
@@ -24,24 +23,16 @@ export default {
   },
   data() {
     return {
-      isActive: false,
-      //products: [],
-      profiles: []
+      isActive: false
     }
   },
-  //created() {
-      
-      
-  //},
   async created() {
     await this.getProductsAction();
-    axios.get('https://reqres.in/api/users?page=2')
-        .then(res => this.profiles = res.data.data, )
-        .catch(err => console.log(err));
+    await this.getProfilesAction();
     console.log('hello from component!!!');
   },
   methods: {
-    ...mapActions(['getProductsAction']),
+    ...mapActions(['getProductsAction','getProfilesAction']),
     
     toggleSidebar() {
         this.isActive = !this.isActive;
@@ -60,7 +51,7 @@ export default {
   },
   mixins: [myLifeCycleHooks],
   computed: {
-    ...mapState(['products'])
+    ...mapState(['products','profiles'])
   }
 }
 </script>

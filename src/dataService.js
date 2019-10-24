@@ -13,6 +13,18 @@ const getProducts = async function() {
   }
 };
 
+const getProfiles = async function() {
+  try {
+    const response = await axios.get('https://reqres.in/api/users?page=2');
+    let data = parseList(response);
+    const profiles = data.data;
+    return profiles;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
+
 const parseList = response => {
     if (response.status !== 200) throw Error(response.message);
     if (!response.data) return [];
@@ -24,5 +36,6 @@ const parseList = response => {
 };
 
 export const dataService = {
-    getProducts
+    getProducts,
+    getProfiles
 };

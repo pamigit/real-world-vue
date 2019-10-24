@@ -71,6 +71,7 @@
                             <div class="form-group row">
                                 <div class="offset-4 col-8">
                                     <button name="submit" type="submit" class="btn btn-primary">Update My Profile</button>
+                                    <button type="button" class="btn btn-warning ml-3" @click="cancelEdit">Cancel</button>
                                 </div>
                             </div>
                         </form>
@@ -90,7 +91,12 @@
                 proId: this.$route.params.profileId
             }
         },
-        props: ['profiles']
+        props: ['profiles'],
+        methods: {
+            cancelEdit() {
+                this.$router.push({ name: 'profiles' });
+            }
+        },
     }
 </script>
 
