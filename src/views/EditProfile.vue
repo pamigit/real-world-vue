@@ -8,32 +8,31 @@
                         <hr>
                     </div>
                 </div>
-                <div v-for="profile in profiles" :key="profile.id">
-                <div class="row" v-if="proId == profile.id">
+                <div class="row">
                     <div class="col-md-12">
-                        <form>
+                        <form @submit.prevent="updateProfile">
                             <div class="form-group row">
                                 <label for="username" class="col-4 col-form-label">User Name*</label> 
                                 <div class="col-8">
-                                    <input v-model="profile.first_name" id="username" name="username" placeholder="Username" class="form-control here" required="required" type="text">
+                                    <input v-model="profile.first_name" id="username" name="username" required="required" placeholder="Username" class="form-control here" type="text">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="name" class="col-4 col-form-label">First Name</label> 
                                 <div class="col-8">
-                                    <input v-model="profile.first_name" id="name" name="name" placeholder="First Name" class="form-control here" type="text">
+                                    <input v-model="profile.first_name" id="name" name="name" placeholder="First Name" required="required" class="form-control here" type="text">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="lastname" class="col-4 col-form-label">Last Name</label> 
                                 <div class="col-8">
-                                    <input v-model="profile.last_name" id="lastname" name="lastname" placeholder="Last Name" class="form-control here" type="text">
+                                    <input v-model="profile.last_name" id="lastname" name="lastname" required="required" placeholder="Last Name" class="form-control here" type="text">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="text" class="col-4 col-form-label">Nick Name*</label> 
+                                <label for="text" class="col-4 col-form-label">Nick Name</label> 
                                 <div class="col-8">
-                                    <input id="text" name="text" placeholder="Nick Name" class="form-control here" required="required" type="text">
+                                    <input id="text" name="text" placeholder="Nick Name" class="form-control here" type="text">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -77,23 +76,36 @@
                         </form>
                     </div>
                 </div>
-                </div>
             </div>
         </div>
      </div>
 </template>
 
 <script>
+    import {mapActions, mapGetters} from "vuex";
+    import {cloneDeep} from 'lodash';
+
     export default {
         name: 'editprofile',
         data() {
             return {
-                proId: this.$route.params.profileId
+                proId: this.$route.params.profileId,
+                profile: {}
             }
         },
-        props: ['profiles'],
+        created () {
+            this.profile = cloneDeep(this.getProfileById(this.proId));
+        },
+        computed: {
+            ...mapGetters(['getProfileById'])
+        },
         methods: {
+            ...mapActions(['updateProfileAction']),
             cancelEdit() {
+                this.$router.push({ name: 'profiles' });
+            },
+            async updateProfile() {
+                await this.updateProfileAction(this.profile);
                 this.$router.push({ name: 'profiles' });
             }
         },
