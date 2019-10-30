@@ -16,7 +16,7 @@ const mutations = {
     state.profiles = profiles;
   },
   updateProfile(state, profile) {
-    const index = state.profiles.findIndex(p => p.id === profile.id);
+    const index = state.profiles.findIndex(p => p.id == profile.id);
     state.profiles.splice(index, 1, profile);
     state.profiles = [...state.profiles];
   }

@@ -1,4 +1,6 @@
 <template>
+  <div>
+    <Modal :isOpen="showModal" @handleNo="closeModal" @handleYes="updateProfile"></Modal>
     <div class="col-md-9">
         <div class="card mt-3">
             <div class="card-body">
@@ -10,7 +12,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <form @submit.prevent="updateProfile">
+                        <form>
                             <div class="form-group row">
                                 <label for="username" class="col-4 col-form-label">User Name*</label> 
                                 <div class="col-8">
@@ -69,7 +71,7 @@
                             </div> 
                             <div class="form-group row">
                                 <div class="offset-4 col-8">
-                                    <button name="submit" type="submit" class="btn btn-primary">Update My Profile</button>
+                                    <button @click="askToUpdate(profile)" type="button" class="btn btn-primary">Update My Profile</button>
                                     <button type="button" class="btn btn-warning ml-3" @click="cancelEdit">Cancel</button>
                                 </div>
                             </div>
@@ -79,19 +81,26 @@
             </div>
         </div>
      </div>
+  </div>
 </template>
 
 <script>
     import {mapActions, mapGetters} from "vuex";
     import {cloneDeep} from 'lodash';
+    import Modal from '../components/Modal'
 
     export default {
         name: 'editprofile',
         data() {
             return {
                 proId: this.$route.params.profileId,
-                profile: {}
+                profile: {},
+                showModal: false,
+                profileToUpdate: null,
             }
+        },
+        components: {
+            Modal,
         },
         created () {
             this.profile = cloneDeep(this.getProfileById(this.proId));
@@ -104,8 +113,18 @@
             cancelEdit() {
                 this.$router.push({ name: 'profiles' });
             },
+            askToUpdate(profile) {
+                this.profileToUpdate = profile;
+                this.showModal = true;
+            },
+            closeModal() {
+                this.showModal = false;
+            },
             async updateProfile() {
-                await this.updateProfileAction(this.profile);
+                this.closeModal();
+                if (this.profileToUpdate) {
+                    await this.updateProfileAction(this.profileToUpdate);
+                }
                 this.$router.push({ name: 'profiles' });
             }
         },
