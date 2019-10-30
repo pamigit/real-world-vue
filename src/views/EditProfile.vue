@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Modal :isOpen="showModal" @handleNo="closeModal" @handleYes="updateProfile"></Modal>
+    <Modal :profile="profileToUpdate" :isOpen="showModal" @handleNo="closeModal" @handleYes="updateProfile"></Modal>
     <div class="col-md-9">
         <div class="card mt-3">
             <div class="card-body">
@@ -96,7 +96,7 @@
                 proId: this.$route.params.profileId,
                 profile: {},
                 showModal: false,
-                profileToUpdate: null,
+                profileToUpdate: {},
             }
         },
         components: {
@@ -125,6 +125,10 @@
                 if (this.profileToUpdate) {
                     await this.updateProfileAction(this.profileToUpdate);
                 }
+                console.log("Updated profile is: " 
+                    + this.profileToUpdate.first_name + ', '
+                    + this.profileToUpdate.last_name + ', ' 
+                    + this.profileToUpdate.email);
                 this.$router.push({ name: 'profiles' });
             }
         },

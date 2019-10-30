@@ -3,10 +3,10 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Confirm Update Profile</h5>
+                <h5 class="modal-title">Update Profile {{profile.first_name}} {{profile.last_name}}</h5>
             </div>
             <div class="modal-body">
-                Are you sure to want change user?
+                Are you sure to want a change profile details?
             </div>
             <div class="modal-footer">
                 <button @click="onYes" type="button" class="btn btn-primary">Yes</button>
@@ -18,29 +18,23 @@
 </template>
 
 <script>
-    export default {
-        name: 'Modal',
-        props: {
-            isOpen: {
-                type: Boolean,
-                default: () => false,
-            },
+export default {
+    name: 'Modal',
+    props: ['isOpen', 'profile'],
+    methods: {
+        onNo() {
+            this.$emit('handleNo');
         },
-        methods: {
-            onNo() {
-                this.$emit('handleNo');
-            },
-            onYes() {
-                this.$emit('handleYes');
-            },
+        onYes() {
+            this.$emit('handleYes');
         },
     }
+};
 </script>
 
 <style scoped>
 .show {
-    display: block;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
+  display: block;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 </style>
