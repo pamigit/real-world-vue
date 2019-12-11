@@ -5,8 +5,11 @@ import store from "./store";
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import animate from 'animate.css'
+import 'animate.css/animate.min.css'
 
 Vue.use(BootstrapVue)
+Vue.use(animate)
 
 Vue.config.productionTip = false;
 
